@@ -118,6 +118,7 @@ fi
 
 if [ "${INPUT_USE_TAG}" = true ]; then
     COMMIT_TAG_NAME=$(date "+%Y-%m%d-%H%M%S-%N")
+    echo "TAG_NAME: $COMMIT_TAG_NAME"
     sed -i "s/COMMIT_TAG_NAME/$COMMIT_TAG_NAME/" ${GITHUB_WORKSPACE}/${JEKYLL_SRC}/_config.yml
 fi
 
@@ -145,7 +146,7 @@ if [ "${INPUT_USE_TAG}" = true ]; then
     git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
     git add . && \
     git commit $COMMIT_OPTIONS -m "jekyll build from Action ${GITHUB_SHA}" && \
-    git tag $COMMIT_TAG_NAME && \
+    git tag -a $COMMIT_TAG_NAME -m "Used by jsdelivr CDN." && \
     git push --follow-tags $PUSH_OPTIONS $REMOTE_REPO $LOCAL_BRANCH:$remote_branch && \
     rm -fr .git && \
     cd .. 
