@@ -1,9 +1,9 @@
 FROM ruby:2.7-alpine
 
 LABEL version="2.0.1"
-LABEL repository="https://github.com/helaili/jekyll-action"
-LABEL homepage="https://github.com/helaili/jekyll-action"
-LABEL maintainer="Alain Hélaïli <helaili@github.com>"
+LABEL repository="https://github.com/cubarco/jekyll-action"
+LABEL homepage="https://github.com/cubarco/jekyll-action"
+LABEL maintainer="Marco Lin <cubarco@github.com>"
 
 RUN apk add --no-cache git build-base
 # Allow for timezone setting in _config.yml

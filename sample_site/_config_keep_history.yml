@@ -1,3 +1,0 @@
-title: Jekyll AsciiDoc Action - Keep history
-test_id: jekyll_src
-keep_files: [.git, hello.html]

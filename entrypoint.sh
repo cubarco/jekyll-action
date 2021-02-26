@@ -116,6 +116,11 @@ else
   echo "::debug::Jekyll debug is off"
 fi
 
+if [ "${USE_TAG}" = true ]; then
+    COMMIT_TAG_NAME=$(date "+%Y-%m%d-%H%M%S-%N")
+    sed -i "s/COMMIT_TAG_NAME/$COMMIT_TAG_NAME/" ${GITHUB_WORKSPACE}/${JEKYLL_SRC}/_config.yml
+fi
+
 JEKYLL_ENV=${INPUT_JEKYLL_ENV} bundle exec ${BUNDLE_ARGS} jekyll build -s ${GITHUB_WORKSPACE}/${JEKYLL_SRC} -d ${BUILD_DIR} ${INPUT_JEKYLL_BUILD_OPTIONS} ${VERBOSE} 
 echo "Jekyll build done"
 
@@ -135,12 +140,23 @@ touch .nojekyll
 
 echo "Publishing to ${GITHUB_REPOSITORY} on branch ${remote_branch}"
 
-git config user.name "${GITHUB_ACTOR}" && \
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
-git add . && \
-git commit $COMMIT_OPTIONS -m "jekyll build from Action ${GITHUB_SHA}" && \
-git push $PUSH_OPTIONS $REMOTE_REPO $LOCAL_BRANCH:$remote_branch && \
-rm -fr .git && \
-cd .. 
+if [ "${USE_TAG}" = true ]; then
+    git config user.name "${GITHUB_ACTOR}" && \
+    git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+    git add . && \
+    git commit $COMMIT_OPTIONS -m "jekyll build from Action ${GITHUB_SHA}" && \
+    git tag $COMMIT_TAG_NAME
+    git push --follow-tags $PUSH_OPTIONS $REMOTE_REPO $LOCAL_BRANCH:$remote_branch && \
+    rm -fr .git && \
+    cd .. 
+else
+    git config user.name "${GITHUB_ACTOR}" && \
+    git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+    git add . && \
+    git commit $COMMIT_OPTIONS -m "jekyll build from Action ${GITHUB_SHA}" && \
+    git push $PUSH_OPTIONS $REMOTE_REPO $LOCAL_BRANCH:$remote_branch && \
+    rm -fr .git && \
+    cd .. 
+fi
 
 exit $?
