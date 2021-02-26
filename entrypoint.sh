@@ -117,7 +117,7 @@ else
 fi
 
 if [ "${INPUT_USE_TAG}" = true ]; then
-    COMMIT_TAG_NAME=$(date "+%Y-%m%d-%H%M%S-%N")
+    COMMIT_TAG_NAME=$(date "+%Y-%m%d-%H%M%S-$RANDOM")
     echo "TAG_NAME: $COMMIT_TAG_NAME"
     sed -i "s/COMMIT_TAG_NAME/$COMMIT_TAG_NAME/" ${GITHUB_WORKSPACE}/${JEKYLL_SRC}/_config.yml
 fi
