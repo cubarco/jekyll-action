@@ -22,6 +22,9 @@ inputs:
   build_only:
     description: 'Will build the Jekyll site without publishing it'
     required: false
+  use_tag:
+    description: 'Will tag the commit before push'
+    required: false
   keep_history:
     description: 'Do not overwrite whatever was already published on the target branch'
     required: false
