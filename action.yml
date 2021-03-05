@@ -25,6 +25,9 @@ inputs:
   use_tag:
     description: 'Will tag the commit before push'
     required: false
+  build_dir:
+    description: 'The output path of jekyll build'
+    required: false
   keep_history:
     description: 'Do not overwrite whatever was already published on the target branch'
     required: false
