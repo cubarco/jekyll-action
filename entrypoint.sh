@@ -111,10 +111,6 @@ echo "::debug::Bundle config set succesfully"
 bundle install
 echo "::debug::Completed bundle install"
 
-if [ -f "package.json" ]; then
-  npm install
-fi
-
 VERBOSE=""
 if [ "${JEKYLL_DEBUG}" = true ]; then
   # Activating debug for Jekyll
@@ -138,6 +134,7 @@ if [ "${INPUT_BUILD_ONLY}" = true ]; then
 fi
 
 if [ "${INPUT_PURGECSS}" = true ]; then
+    npm install purgecss
     ${GITHUB_WORKSPACE}/node_modules/.bin/purgecss --css ${BUILD_DIR}/assets/css/main.css --content ${BUILD_DIR}/**/*.html --output ${BUILD_DIR}/assets/css
 fi
 
