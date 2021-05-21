@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine
+FROM timbru31/ruby-node:2.7-slim-12
 
 LABEL version="2.0.1"
 LABEL repository="https://github.com/cubarco/jekyll-action"
