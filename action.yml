@@ -31,6 +31,9 @@ inputs:
   keep_history:
     description: 'Do not overwrite whatever was already published on the target branch'
     required: false
+  purgecss:
+    description: 'Purgecss'
+    required: false
   pre_build_commands:
     description: >
       Commands to run prior to build and deploy. Useful for
