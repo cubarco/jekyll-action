@@ -111,6 +111,10 @@ echo "::debug::Bundle config set succesfully"
 bundle install
 echo "::debug::Completed bundle install"
 
+if [ -f "package.json" ]; then
+  npm install
+fi
+
 VERBOSE=""
 if [ "${JEKYLL_DEBUG}" = true ]; then
   # Activating debug for Jekyll
