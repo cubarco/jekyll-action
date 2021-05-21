@@ -135,7 +135,7 @@ fi
 
 if [ "${INPUT_PURGECSS}" = true ]; then
     npm install purgecss
-    ${GITHUB_WORKSPACE}/node_modules/.bin/purgecss --css ${BUILD_DIR}/assets/css/main.css --content ${BUILD_DIR}/**/*.html --output ${BUILD_DIR}/assets/css
+    ${GITHUB_WORKSPACE}/node_modules/.bin/purgecss --css ${BUILD_DIR}/assets/css/main.css --content ${BUILD_DIR}/**/*.html --content ${BUILD_DIR}/**/*.js --output ${BUILD_DIR}/assets/css
 fi
 
 if [ "${GITHUB_REF}" = "refs/heads/${remote_branch}" ]; then
