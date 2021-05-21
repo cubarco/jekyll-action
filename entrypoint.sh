@@ -137,6 +137,10 @@ if [ "${INPUT_BUILD_ONLY}" = true ]; then
   exit $?
 fi
 
+if [ "${INPUT_PURGECSS}" = true ]; then
+    ${GITHUB_WORKSPACE}/node_modules/.bin/purgecss --css ${BUILD_DIR}/assets/css/main.css --content ${BUILD_DIR}/**/*.html --output ${BUILD_DIR}/assets/css
+fi
+
 if [ "${GITHUB_REF}" = "refs/heads/${remote_branch}" ]; then
   echo "::error::Cannot publish on branch ${remote_branch}"
   exit 1
